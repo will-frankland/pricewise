@@ -42,12 +42,17 @@ export async function scrapeAmazonProduct(url: string) {
       $('#.a-size-base.a-color-price')
     );
 
-    const outOfStock = $('#availability span').text().trim().toLowerCase() === 'currently unavailable'
+    const outOfStock = $('#availability span').text().trim().toLowerCase() === 'currently unavailable';
+
+    const image =
+      $('#imgBlkFront').attr('data-a-dynamic-image') ||
+      $('#landingImage').attr('data-a-dynamic-image');
 
     console.log('title', title);
     console.log('currentPrice', currentPrice);
     console.log('originalPrice', originalPrice);
     console.log('outOfStock', outOfStock);
+    console.log('image', image);
   } catch(error: any) {
     throw new Error(`Failed to scrape product: ${error.message}`)
   }
