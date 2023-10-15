@@ -44,15 +44,18 @@ export async function scrapeAmazonProduct(url: string) {
 
     const outOfStock = $('#availability span').text().trim().toLowerCase() === 'currently unavailable';
 
-    const image =
+    const images =
       $('#imgBlkFront').attr('data-a-dynamic-image') ||
-      $('#landingImage').attr('data-a-dynamic-image');
+      $('#landingImage').attr('data-a-dynamic-image') ||
+      '{}';
+
+    const imageUrls = Object.keys(JSON.parse(images));
 
     console.log('title', title);
     console.log('currentPrice', currentPrice);
     console.log('originalPrice', originalPrice);
     console.log('outOfStock', outOfStock);
-    console.log('image', image);
+    console.log('image', imageUrls);
   } catch(error: any) {
     throw new Error(`Failed to scrape product: ${error.message}`)
   }
