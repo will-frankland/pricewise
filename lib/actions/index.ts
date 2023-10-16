@@ -40,8 +40,22 @@ export async function scrapeAndStoreProduct(productUrl: string) {
     );
 
     revalidatePath(`/products/${newProduct._id}`);
-    
+
   } catch (error: any) {
     throw new Error(`Failed to create/update product: ${error.message}`);
+  }
+}
+
+export async function getProductById(productId: string) {
+  try{
+    connectToDB();
+    const product = await Product.findOne({ _id: productId });
+    
+    if(!product) return null;
+    
+    return product;
+    
+  } catch (error: any) {
+
   }
 }
