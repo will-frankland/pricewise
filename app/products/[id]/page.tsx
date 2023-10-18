@@ -4,6 +4,7 @@ import { Product } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
 import { formatNumber } from "@/lib/utils";
+import PriceInfoCard from "@/components/PriceInfoCard";
 
 type Props = {
   params: { id: string };
@@ -94,7 +95,18 @@ const ProductDetails = async ({ params: { id } }: Props) => {
                   <p className="text-sm text-secondary font-semibold">{product.reviewsCount}</p>
                 </div>
               </div>
-
+              <p className="text-sm text-black opacity-50">
+                <span className="text-primary-green font-smeibold">
+                  93%
+                </span> of buyers have recommended this.
+              </p>
+            </div>
+          </div>
+          <div className="my-7 flex flex-col gap-5">
+            <div className="flex gap-5 flex-wrap">
+              <PriceInfoCard
+              
+              />
             </div>
           </div>
         </div>
