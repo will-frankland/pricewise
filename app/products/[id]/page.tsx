@@ -82,7 +82,16 @@ const ProductDetails = async ({ params: { id } }: Props) => {
                     width={16}
                     height={16}
                   />
-                  <p>{product.stars}</p>
+                  <p className="text-sm text-primary-orange font-semibold">{product.stars || '25'}</p>
+                </div>
+                <div className="product-reviews">
+                  <Image
+                    src={'/assets/icons/comment.svg'}
+                    alt="comments"
+                    width={16}
+                    height={16}
+                  />
+                  <p className="text-sm text-secondary font-semibold">{product.reviewsCount}</p>
                 </div>
               </div>
 
