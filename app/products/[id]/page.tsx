@@ -73,6 +73,20 @@ const ProductDetails = async ({ params: { id } }: Props) => {
               <p className="text-[34px] text-secondary font-bold">{product.currency} {formatNumber(product.currentPrice)}</p>
               <p className="text-[21px] text-black opacity-50 line-through">{product.currency} {formatNumber(product.originalPrice)}</p>
             </div>
+            <div className="flex flex-col gap-4">
+              <div className="flex gap-3">
+                <div className="product-stars">
+                  <Image
+                    src={'/assets/icons/star.svg'}
+                    alt="star"
+                    width={16}
+                    height={16}
+                  />
+                  <p>{product.stars}</p>
+                </div>
+              </div>
+
+            </div>
           </div>
         </div>
       </div>
