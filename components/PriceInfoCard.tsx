@@ -1,6 +1,11 @@
-import React from 'react'
+interface Props {
+  title: string,
+  iconSrc: string,
+  value: string,
+  borderColor: string,
+}
 
-const PriceInfoCard = () => {
+const PriceInfoCard = ({ title, iconSrc, value, borderColor }: Props) => {
   return (
     <div>
       Price Info Card
