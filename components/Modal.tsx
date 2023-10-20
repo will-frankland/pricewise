@@ -3,9 +3,18 @@
 import { Fragment, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import Image from "next/image";
+import { FormEvent } from "react";
 
 const Modal = () => {
   let [isOpen, setIsOpen] = useState(true);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [email, setEmail] = useState('');
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    // Add user email to product
+  };
 
   const openModal = () => setIsOpen(true);
   const closeModal = () => setIsOpen(false);
@@ -73,7 +82,7 @@ const Modal = () => {
                   </h4>
                   <p className="text-sm text-gray-600 mt-2">Never miss a bargain again with our timely alerts!</p>
                 </div>
-                <form className="flex flex-col mt-5">
+                <form className="flex flex-col mt-5" onSubmit={handleSubmit}>
                   <label htmlFor="email" className="text-sm font-medium text-gray-700">
                     Email Address
                   </label>
@@ -90,10 +99,12 @@ const Modal = () => {
                       id="email"
                       placeholder="Enter your email address"
                       className="dialog-input"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
                     />
                   </div>
                   <button type="submit" className="dialog-btn">
-                    Track
+                    {isSubmitting ? 'Submitting' : 'Track'}
                   </button>
                 </form>
               </div>
