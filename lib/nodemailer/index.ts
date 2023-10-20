@@ -1,4 +1,4 @@
-import { EmailProductInfo, NotificationType } from '@/types';
+import { EmailContent, EmailProductInfo, NotificationType } from '@/types';
 import nodemailer from 'nodemailer';
 
 export const THRESHOLD_PERCENTAGE = 40;
@@ -69,4 +69,24 @@ export const generateEmailBody = (product: EmailProductInfo, type: NotificationT
       throw new Error("Invalid notification type.")
   }
   return { subject, body };
+}
+
+const transporter = nodemailer.createTransport({
+  pool: true,
+  service: 'hotmail',
+  port: 2525,
+  auth: {
+    user: '',
+    pass: '',
+  },
+  maxConnections: 1
+})
+
+export const sendEmail = async (emailContent: EmailContent, sendTo: string[]) => {
+  const mailOptions = {
+    from: '',
+    to: sendTo,
+    html: emailContent.body,
+    subject: emailContent.subject,
+  }
 }
