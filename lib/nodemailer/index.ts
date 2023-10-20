@@ -76,17 +76,23 @@ const transporter = nodemailer.createTransport({
   service: 'hotmail',
   port: 2525,
   auth: {
-    user: '',
-    pass: '',
+    user: 'pricewise-will@outlook.com',
+    pass: process.env.EMAIL_PASSWORD,
   },
   maxConnections: 1
 })
 
 export const sendEmail = async (emailContent: EmailContent, sendTo: string[]) => {
   const mailOptions = {
-    from: '',
+    from: 'pricewise-will@outlook.com',
     to: sendTo,
     html: emailContent.body,
     subject: emailContent.subject,
   }
+
+  transporter.sendEmail(mailOptions, (error: any, info: any) => {
+    if(error) return console.log(error);
+
+    console.log('Email send: ', info);
+  })
 }
