@@ -24,7 +24,7 @@ export async function scrapeAndStoreProduct(productUrl: string) {
     if (existingProduct) {
       const updatedPriceHistory: any = [
         ...existingProduct.priceHistory,
-        { price: scrapedProduct.currentPrice },
+        { price: scrapedProduct.currentPrice }
       ];
       product = {
         ...scrapedProduct,
@@ -55,7 +55,9 @@ export async function getProductById(productId: string) {
     if (!product) return null;
 
     return product;
-  } catch (error: any) {}
+  } catch (error: any) {
+    console.log(error);
+  }
 }
 
 export async function getAllProducts() {
@@ -81,19 +83,23 @@ export async function getSimilarProducts(productId: string) {
     }).limit(3);
 
     return similarProducts;
-    
   } catch (error: any) {
     console.log(error);
   }
 }
 
-export async function addUserEmailToProduct(productId: string, userEmail: string) {
+export async function addUserEmailToProduct(
+  productId: string,
+  userEmail: string
+) {
   try {
     const product = await Product.findById(productId);
-    if(!product) return;
+    if (!product) return;
 
-    const userExists = product.users.some((user: User) => user.email === userEmail);
-    if(!userExists) {
+    const userExists = product.users.some(
+      (user: User) => user.email === userEmail
+    );
+    if (!userExists) {
       product.users.push({ email: userEmail });
     }
 
@@ -102,8 +108,7 @@ export async function addUserEmailToProduct(productId: string, userEmail: string
     const emailContent = await generateEmailBody(product, "WELCOME");
 
     await sendEmail(emailContent, [userEmail]);
-
   } catch (error: any) {
-    console.log(error)
+    console.log(error);
   }
 }
